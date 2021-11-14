@@ -7,6 +7,30 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {}
+function palindromeV1(str) {
+    const rev = str.split('').reverse().join('');
+    return str === rev;
+}
+
+//less space complexity, no creating another str
+function palindromev2(str) {
+    let result = true;
+    for (let i = 0; i <= str.length / 2; i++) {
+        const j = (str.length-1) - i;
+        if (str[i] !== str[j]) {
+            result = false;
+        }
+    }
+
+    return result;
+}
+
+// compared to v2 will touch every elem twice, pointers will cross
+function palindrome(str) {
+    const arr = str.split('');
+    return arr.every((char, i) => {
+        return char === arr[(arr.length -1) - i];
+    })
+}
 
 module.exports = palindrome;
