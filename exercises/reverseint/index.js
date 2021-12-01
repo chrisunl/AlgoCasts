@@ -27,9 +27,22 @@ function reverseIntV1(n) {
     return parseInt(rev);
 }
 
-function reverseInt(n) {
+function reverseIntV2(n) {
     const rev = n.toString().split('').reverse().join('');
     return parseInt(rev) * Math.sign(n);
+}
+
+// https://stackoverflow.com/questions/38053729/javascript-how-to-reverse-a-number
+function reverseInt(n){
+    var digit, result = 0
+    // bitwise arithmetic
+    while( n ){
+        digit = n % 10  //  Get right-most digit. Ex. 123/10 → 12.3 → (Mod is) 3
+        result = (result * 10) + digit  //  Ex. 0 → 0 + 3 → 3
+        n = n/10|0  //  Remove right-most digit. Ex. 123 → 12.3 → 12
+    }  
+  
+    return result
 }
 
 
