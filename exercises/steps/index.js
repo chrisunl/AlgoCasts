@@ -17,15 +17,31 @@
 //       '### '
 //       '####'
 
-function steps(n) {
-    for (let row = 0; row < n; row++) {
-        let line = '';
-        for (let col = 0; col < n; col++) {
-            let symbol = col <= row ? "#" : " ";
-            line = line.concat(symbol);
-        }
-        console.log(line);
+function steps(n, line = '', lineNum = 0) {
+
+    if (lineNum === n) {
+        return;
     }
+
+    if (line.length === n) {
+        console.log(line);
+        return steps(n, '', ++lineNum);
+    } else {
+        line += (line.length > lineNum ? ' ' : '#');
+        return steps(n, line, lineNum);
+    }    
 }
+
+// function steps(n) {
+//     for (let row = 0; row < n; row++) {
+//         let line = '';
+//         for (let col = 0; col < n; col++) {
+//             let symbol = col <= row ? "#" : " ";
+//             line = line.concat(symbol);
+//         }
+//         console.log(line);
+//     }
+// }
+
 
 module.exports = steps;
