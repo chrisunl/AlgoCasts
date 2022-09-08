@@ -11,7 +11,7 @@
 //       '###'
 //   pyramid(3)
 //       '  #  '
-//       ' ### ' 5 - 3 = 2
+//       ' ### '
 //       '#####'
 
   //  '---x---' 0 + 1 
@@ -21,34 +21,61 @@
 
 // Width = n + n - 1
 
-function pyramid(n) {
-    
-    for (let row = 0; row < n; row++) {
-        let line = '';
-        const numColumns = n + (n - 1);
-        const numHashes = row + (row + 1);
-        const numSpacesOnLeft = (numColumns - numHashes) / 2;
-        let hashes = 0;
-        let spaces = 0;
-        for (let col = 0; col < numColumns; col++) {
-            let symbol = '';
-            if (spaces < numSpacesOnLeft) {
-                symbol = ' ';
-                spaces++;
-            } else if (hashes < numHashes) {
-                symbol = '#';
-                hashes++;
-            } else {
-                // symetrical so whatever space is left on the right (if any) after all the hashes must be spaces
-                symbol = ' ';
-                hashes++;
-            }
+// function pyramid(n) {
+//     for (let row = 0; row < n; row++) {
+//         let line = '';
+//         const numColumns = n + (n - 1);
+//         const numHashes = row + (row + 1);
+//         const numSpacesOnLeft = (numColumns - numHashes) / 2;
+//         let hashes = 0;
+//         let spaces = 0;
+//         for (let col = 0; col < numColumns; col++) {
+//             let symbol = '';
+//             if (spaces < numSpacesOnLeft) {
+//                 symbol = ' ';
+//                 spaces++;
+//             } else if (hashes < numHashes) {
+//                 symbol = '#';
+//                 hashes++;
+//             } else {
+//                 // symetrical so whatever space remains on the right (if any) after all the hashes must be spaces
+//                 symbol = ' ';
+//                 hashes++;
+//             }
 
-            line += symbol;
-        }
-        console.log(line);
+//             line += symbol;
+//         }
+//         console.log(line);
+//     }
+// }
+
+function pyramid(n, lineNum = 0, line = '', hashes = 0, spaces = 0) {
+
+    const numColumns = n + (n - 1);
+    const numHashes = lineNum + (lineNum + 1);
+    const numSpacesOnLeft = (numColumns - numHashes) / 2;
+
+    if (lineNum === n) {
+        return;
     }
 
+    if (line.length === numColumns) {
+        console.log(line);
+        return pyramid(n, ++lineNum, '', 0, 0);
+    }
+
+    if (spaces < numSpacesOnLeft) {
+        symbol = ' ';
+        spaces++;
+    } else if (hashes < numHashes) {
+        symbol = '#';
+        hashes++;
+    } else {
+        // symetrical so whatever space remains on the right (if any) after all the hashes must be spaces
+        symbol = ' ';
+    }
+
+    return pyramid(n, lineNum, line += symbol, hashes, spaces);
 }
 
 module.exports = pyramid;
