@@ -40,7 +40,6 @@
 //             } else {
 //                 // symetrical so whatever space remains on the right (if any) after all the hashes must be spaces
 //                 symbol = ' ';
-//                 hashes++;
 //             }
 
 //             line += symbol;
