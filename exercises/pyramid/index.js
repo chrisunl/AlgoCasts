@@ -48,33 +48,71 @@
 //     }
 // }
 
-function pyramid(n, lineNum = 0, line = '', hashes = 0, spaces = 0) {
+// function pyramid(n, lineNum = 0, line = '', hashes = 0, spaces = 0) {
 
-    const numColumns = n + (n - 1);
-    const numHashes = lineNum + (lineNum + 1);
-    const numSpacesOnLeft = (numColumns - numHashes) / 2;
+//     const numColumns = n + (n - 1);
+//     const numHashes = lineNum + (lineNum + 1);
+//     const numSpacesOnLeft = (numColumns - numHashes) / 2;
 
-    if (lineNum === n) {
+//     if (lineNum === n) {
+//         return;
+//     }
+
+//     if (line.length === numColumns) {
+//         console.log(line);
+//         return pyramid(n, ++lineNum, '', 0, 0);
+//     }
+
+//     if (spaces < numSpacesOnLeft) {
+//         symbol = ' ';
+//         spaces++;
+//     } else if (hashes < numHashes) {
+//         symbol = '#';
+//         hashes++;
+//     } else {
+//         // symetrical so whatever space remains on the right (if any) after all the hashes must be spaces
+//         symbol = ' ';
+//     }
+
+//     return pyramid(n, lineNum, line += symbol, hashes, spaces);
+// }
+
+// udemy iteration solution
+// function pyramid(n) {
+//     const numCols = (2 * n) - 1; // or n + n - 1
+//     const midPoint = Math.floor(numCols / 2);
+
+//     for (let row = 0; row < n; row++) {
+//         let line = '';
+//         for (let col = 0; col < numCols; col++) {
+//             // i.e ' ### ' (2nd row of n = 3 ). is col within range of midpoint (mid - 1 <= col && mid + 1 >=col)
+//             if (midPoint - row <= col && midPoint + row >=col) {
+//                 line += '#';
+//             } else {
+//                 line += ' ';
+//             }
+//         }
+//         console.log(line);
+//     }
+// }
+
+// udemy recursive solution
+function pyramid(n, line = '', rowNum = 0) {
+    const numCols = (2 * n) - 1; // or n + n - 1
+    const midPoint = Math.floor(numCols / 2);
+
+    if (rowNum === n) {
         return;
     }
 
-    if (line.length === numColumns) {
+    if (line.length === numCols) {
         console.log(line);
-        return pyramid(n, ++lineNum, '', 0, 0);
+        return pyramid(n, '', ++rowNum);
     }
 
-    if (spaces < numSpacesOnLeft) {
-        symbol = ' ';
-        spaces++;
-    } else if (hashes < numHashes) {
-        symbol = '#';
-        hashes++;
-    } else {
-        // symetrical so whatever space remains on the right (if any) after all the hashes must be spaces
-        symbol = ' ';
-    }
-
-    return pyramid(n, lineNum, line += symbol, hashes, spaces);
+    const col = line.length;
+    line += (col >= midPoint - rowNum && col <= midPoint + rowNum) ? '#' : ' ';
+    return pyramid(n, line, rowNum);
 }
 
 module.exports = pyramid;
