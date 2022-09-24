@@ -10,6 +10,36 @@
 //   s.pop(); // returns 2
 //   s.pop(); // returns 1
 
-class Stack {}
+class Stack {
+    constructor() {
+        this.data = [];
+    }
+
+    // considering the head of the array the top of the stack
+    // push(elem) {
+    //     this.data.unshift(elem);
+    // }
+
+    // pop() {
+    //     return this.data.length ? this.data.splice(0,1)[0] : null;
+    // }
+
+    // peek() {
+    //     return this.data[0];
+    // }
+
+    // Simpler, consider the end of the array the top of the stack
+    push(elem) {
+        this.data.push(elem);
+    }
+
+    pop() {
+        return this.data.pop()
+    }
+
+    peek() {
+        return this.data[this.data.length - 1];
+    }
+}
 
 module.exports = Stack;
