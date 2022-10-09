@@ -27,12 +27,7 @@ class LinkedList {
     }
 
     insertFirst(data) {
-        if (!this.head) {
-            this.head = new Node(data)
-        } else {
-            const temp = this.head;
-            this.head = new Node(data, temp)
-        }
+        this.head = new Node(data, this.head);
     }
 
     size() {
@@ -64,6 +59,10 @@ class LinkedList {
     }
 
     removeFirst() {
+        if (!this.head) {
+            return;
+        }
+
         this.head = this.head.next;
     }
 
@@ -93,16 +92,17 @@ class LinkedList {
     }
 
     getAt(index) {
-        if (!this.size() || index < 0 || index+1 > this.size()) {
-            return null;
-        } else {
-            let current = this.head;
-            for (let j = 1; j <= index; j++) {
-                current = current.next;
-            }
-
-            return current;
+        let counter = 0;
+        let node = this.head;
+        while (node) {
+          if (counter === index) {
+            return node;
+          }
+    
+          counter++;
+          node = node.next;
         }
+        return null;
     }
 
     removeAt(index) {
